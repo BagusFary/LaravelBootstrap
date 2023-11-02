@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Berita;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -28,6 +29,7 @@ class IndexController extends Controller
     
     public function berita()
     {
-        return view('berita');
+        $dataBerita = Berita::get();
+        return view("berita",["dataBerita" => $dataBerita]);
     }
 }
