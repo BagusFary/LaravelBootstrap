@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::middleware(['auth'])->group(function(){
+    Route::get('/', [IndexController::class, 'home']);
+    Route::get('/layanan', [IndexController::class, 'layanan']);
+    Route::get('/tentang', [IndexController::class, 'tentang']);
+    Route::get('/hubungi', [IndexController::class, 'hubungi']);
+    Route::get('/berita', [IndexController::class, 'berita']);
+});
 
-Route::get('/', [HomeController::class, 'home']);
-Route::get('/layanan', [HomeController::class, 'layanan']);
-Route::get('/tentang', [HomeController::class, 'tentang']);
-Route::get('/hubungi', [HomeController::class, 'hubungi']);
-Route::get('/berita', [HomeController::class, 'berita']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
