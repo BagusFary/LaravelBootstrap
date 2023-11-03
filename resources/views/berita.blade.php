@@ -4,7 +4,7 @@
 @section('content')
 <section class="signup-section" id="signup">
   <div class="container px-4 px-lg-5">
-    <h1 class="d-flex justify-content-center text-white">Berita</h1>
+    <h1 class="d-flex justify-content-center text-white">BERITAS</h1>
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
