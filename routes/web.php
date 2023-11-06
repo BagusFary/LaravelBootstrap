@@ -15,13 +15,13 @@ use App\Http\Controllers\IndexController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::middleware(['auth'])->group(function(){
-    Route::get('/', [IndexController::class, 'home']);
-    Route::get('/layanan', [IndexController::class, 'layanan']);
-    Route::get('/tentang', [IndexController::class, 'tentang']);
-    Route::get('/hubungi', [IndexController::class, 'hubungi']);
-    Route::get('/berita', [IndexController::class, 'berita']);
-});
+// Route::middleware(['auth'])->group(function(){
+// });
+Route::get('/', [IndexController::class, 'home']);
+Route::get('/layanan', [IndexController::class, 'layanan']);
+Route::get('/tentang', [IndexController::class, 'tentang']);
+Route::get('/hubungi', [IndexController::class, 'hubungi']);
+Route::get('/berita', [IndexController::class, 'berita']);
 
 Auth::routes();
 
