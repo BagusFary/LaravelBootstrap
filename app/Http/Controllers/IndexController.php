@@ -30,6 +30,6 @@ class IndexController extends Controller
     public function berita()
     {
         $dataBerita = Berita::get();
-        return view("berita",["dataBerita" => $dataBerita]);
+        return view("berita.berita",["dataBerita" => $dataBerita]);
     }
 }
