@@ -1,13 +1,13 @@
-@extends('index')
+@extends('layouts.dashboard')
 
 @section('content')
     <div class=" container row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left mt-2">
-                <h2>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
+                <h2>Berita</h2>
             </div>
             <div class="float-right my-2">
-                <a class="btn btn-success" href="{{ route('berita.create') }}"> Input Mahasiswa</a>
+                <a class="btn btn-success" href="{{ route('berita.create') }}"> Tambahkan Berita</a>
             </div>
         </div>
     </div>
@@ -34,14 +34,14 @@
                 <td>{{ $item->deskripsi }}</td>
                 <td>
                     <div class="d-flex justify-content-center">
-                        <img src="{{ asset('/assets/img/' . $item->gambar) }}" class="w-50">
+                        <img src="{{ asset('/gambar/' . $item->gambar) }}" class="w-50">
                     </div>
                 </td>
                 <td>
                     <form action="{{ route('berita.destroy', $item->id) }}" method="POST">
 
-                        <a class="btn btninfo" href="{{ route('berita.show', $item->id) }}">Show</a>
-                        <a class="btn btnprimary" href="{{ route('berita.edit', $item->id) }}">Edit</a>
+                        <a class="btn btn-info" href="{{ route('berita.show', $item->id) }}">Show</a>
+                        <a class="btn btn-primary" href="{{ route('berita.edit', $item->id) }}">Edit</a>
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>

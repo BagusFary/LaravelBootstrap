@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Berita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\BeritaPostRequest;
 use App\Http\Requests\BeritaUpdateRequest;
+use Carbon\Carbon;
+use DateTime;
 
 class BeritaController extends Controller
 {
@@ -31,11 +34,21 @@ class BeritaController extends Controller
      */
     public function store(BeritaPostRequest $request)
     {
-        $postBerita = Berita::create($request->all());
+        $time = Hash::make(Carbon::now());
+        $originalName = $request->file('gambar')->getClientOriginalName();
+        $extension = $request->file('gambar')->getClientOriginalExtension();
+        $newName = Hash::make($originalName.$time) . "." . $extension;
+        $path = public_path('/gambar');
+        $request->file('gambar')->move($path,$newName);
+        $postBerita = Berita::create([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $newName
+        ]);
         if($postBerita){
             return redirect('/berita')->with('success', 'Berita Berhasil Ditambahkan');
         } else {
-            return redirect('/berita')->with('success', "Berita Gagal Ditammbahkan");
+            return redirect('/berita')->with('gagal', "Berita Gagal Ditammbahkan");
         }
     }
 
@@ -54,7 +67,7 @@ class BeritaController extends Controller
     public function edit(string $id)
     {
         $dataBerita = Berita::find($id);
-        return view('berita.edit', compact($dataBerita));
+        return view('berita.edit', ['dataBerita' => $dataBerita]);
     }
 
     /**

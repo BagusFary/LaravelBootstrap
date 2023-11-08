@@ -7,7 +7,7 @@
     <div class="row justify-content-center align-items-center">
         <div class="card" style="width: 24rem;">
             <div class="card-header">
-                Tambah Berita
+                Edit Berita
             </div>
             <div class="card-body">
                 @if ($errors->any())
@@ -24,17 +24,19 @@
                     @csrf
                     <div class="form-group mb-2">
                         <label for="judul">Judul</label>
-                        <input type="text" name="judul" class="form-control" id="judul" aria-describedby="judul">
+                        <input type="text" name="judul" class="form-control" id="judul" aria-describedby="judul" value="{{ $dataBerita->judul }}">
                     </div>
                     <div class="form-group mb-2">
                         <label for="deskripsi">Deskripsi</label>
-                        <input type="text" name="deskripsi" class="form-control" id="deskripsi" aria-describedby="deskripsi">
+                        <input type="text" name="deskripsi" class="form-control" id="deskripsi" aria-describedby="deskripsi" value="{{ $dataBerita->deskripsi }}">
                     </div>
                     <div class="form-group mb-2">
                         <label for="gambar">Gambar</label>
-                        <input type="file" name="gambar" class="form-control" id="gambar" aria-describedby="password">
+                        <img src="{{ asset('/gambar/'. $dataBerita->gambar) }}" class="w-100" alt="">
+                        <input type="file" name="gambar" class="form-control" id="gambar" aria-describedby="gambar">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="/berita" class="btn btn-warning">Back</a>
                 </form>
             </div>
         </div>
