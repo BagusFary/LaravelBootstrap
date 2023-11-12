@@ -17,7 +17,7 @@
                 <div class="carousel-inner">
                   @foreach ($dataBerita as $item)
                   <div class="carousel-item {{ $loop->iteration == 1 ? "active" : '' }}">
-                    <img src="{{ asset('/assets/img/'. $item->gambar) }}" class="d-block w-100" style="object-fit: cover; max-height:400px;" alt="...">
+                    <img src="{{ asset('/gambar/'. $item->gambar) }}" class="d-block w-100" style="object-fit: cover; max-height:400px;" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                       <h5>{{ $item->judul }}</h5>
                       <p>{{ $item->deskripsi }}</p>

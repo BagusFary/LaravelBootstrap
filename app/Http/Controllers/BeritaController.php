@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+use Carbon\Carbon;
 use App\Models\Berita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\BeritaPostRequest;
 use App\Http\Requests\BeritaUpdateRequest;
-use Carbon\Carbon;
-use DateTime;
 
 class BeritaController extends Controller
 {
@@ -26,7 +27,13 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        return view('berita.create');
+        $dataTable = Berita::get()->first();
+        if($dataTable === 3){
+            return redirect('/berita')->with('gagal', 'Maksimal 3 Post!');
+        } else {
+            return view('berita.create');
+        }
+        
     }
 
     /**
@@ -34,17 +41,21 @@ class BeritaController extends Controller
      */
     public function store(BeritaPostRequest $request)
     {
-        $time = Hash::make(Carbon::now());
-        $originalName = $request->file('gambar')->getClientOriginalName();
-        $extension = $request->file('gambar')->getClientOriginalExtension();
-        $newName = Hash::make($originalName.$time) . "." . $extension;
-        $path = public_path('/gambar');
-        $request->file('gambar')->move($path,$newName);
-        $postBerita = Berita::create([
-            'judul' => $request->judul,
-            'deskripsi' => $request->deskripsi,
-            'gambar' => $newName
-        ]);
+        $dataTable = Berita::get()->count();
+        if($dataTable === 3){
+            return redirect('/berita')->with('gagal', 'Maksimal 3 Post!');
+        } else {
+            $originalName = $request->file('gambar')->getClientOriginalName();
+            $extension = $request->file('gambar')->getClientOriginalExtension();
+            $newName = md5($originalName.Carbon::now()) . "." . $extension;
+            $path = public_path('/gambar');
+            $request->file('gambar')->move($path,$newName);
+            $postBerita = Berita::create([
+                'judul' => $request->judul,
+                'deskripsi' => $request->deskripsi,
+                'gambar' => $newName
+            ]);
+        }
         if($postBerita){
             return redirect('/berita')->with('success', 'Berita Berhasil Ditambahkan');
         } else {
@@ -73,10 +84,37 @@ class BeritaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(BeritaUpdateRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
-        Berita::find($id)->update($request->all);
-        return redirect('/berita')->with('success', 'Mahasiswa Berhasil DiUpdate');
+        $dataOld = Berita::find($id);
+        if($request->file('gambar')){
+            File::delete(public_path('/gambar/'), $dataOld->gambar);
+            $time = Hash::make(Carbon::now());
+            $originalName = $request->file('gambar')->getClientOriginalName();
+            $extension = $request->file('gambar')->getClientOriginalExtension();
+            $newName = Hash::make($originalName.$time) . "." . $extension;
+            $path = public_path('/gambar');
+            $request->file('gambar')->move($path,$newName);
+            $dataBerita = Berita::find($id);
+            $dataBerita->update([
+                'judul' => $request->judul,
+                'deskripsi' => $request->deskripsi,
+                'gambar' => $newName
+            ]);
+        }else {
+            $dataBerita = Berita::find($id);
+            $dataBerita->update([
+                'judul' => $request->judul,
+                'deskripsi' => $request->deskripsi
+            ]);
+        }
+
+        if($dataBerita){
+            return redirect('/berita')->with('success', 'Berita Berhasil DiUpdate');
+        } else {
+            return redirect('/berita')->with('success', 'Berita Berhasil DiUpdate');
+        }
+        
 
     }
 
@@ -85,7 +123,9 @@ class BeritaController extends Controller
      */
     public function destroy(string $id)
     {
-        Berita::find($id)->delete();
+        $dataBerita = Berita::find($id);
+        File::delete(public_path('/gambar/').$dataBerita->gambar);
+        $dataBerita->delete();
         return redirect('/berita')->with('success', 'Berita Berhasil Dihapus');
     }
 }

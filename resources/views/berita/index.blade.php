@@ -17,6 +17,11 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+    @if ($message = Session::get('gagal'))
+        <div class="alert alert-danger">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
 
     <table class="table table-bordered">
         <tr>
@@ -44,7 +49,7 @@
                         <a class="btn btn-primary" href="{{ route('berita.edit', $item->id) }}">Edit</a>
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                     </form>
                 </td>
             </tr>

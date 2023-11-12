@@ -20,7 +20,8 @@
                     </ul>
                 </div>
                 @endif
-                <form method="post" action="{{ route('berita.store') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('berita.update', $dataBerita->id) }}" enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
                     <div class="form-group mb-2">
                         <label for="judul">Judul</label>
@@ -35,7 +36,7 @@
                         <img src="{{ asset('/gambar/'. $dataBerita->gambar) }}" class="w-100" alt="">
                         <input type="file" name="gambar" class="form-control" id="gambar" aria-describedby="gambar">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-success">Save</button>
                     <a href="/berita" class="btn btn-warning">Back</a>
                 </form>
             </div>
