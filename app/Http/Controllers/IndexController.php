@@ -29,7 +29,7 @@ class IndexController extends Controller
     
     public function berita()
     {
-        $dataBerita = Berita::get();
+        $dataBerita = Berita::paginate(3);
         return view("berita.berita",["dataBerita" => $dataBerita]);
     }
 }

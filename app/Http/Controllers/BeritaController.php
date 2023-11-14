@@ -20,7 +20,7 @@ class BeritaController extends Controller
     public function index()
     {
         $dataBerita = Berita::with('category:id,name')->get();
-        return view("berita.index",["dataBerita" => $dataBerita]);
+        return view("berita.index", ["dataBerita" => $dataBerita]);
     }
 
     /**
@@ -28,13 +28,8 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        $dataTable = Berita::get()->count();
         $Category = Category::get();
-        if($dataTable === 3){
-            return redirect('/berita')->with('gagal', 'Maksimal 3 Post!');
-        } else {
-            return view('berita.create',["Category" => $Category]);
-        }
+        return view('berita.create', ["Category" => $Category]);
     }
 
     /**
@@ -42,23 +37,20 @@ class BeritaController extends Controller
      */
     public function store(BeritaPostRequest $request)
     {
-        $dataTable = Berita::get()->count();
-        if($dataTable === 3){
-            return redirect('/berita')->with('gagal', 'Maksimal 3 Post!');
-        } else {
-            $originalName = $request->file('gambar')->getClientOriginalName();
-            $extension = $request->file('gambar')->getClientOriginalExtension();
-            $newName = md5($originalName.Carbon::now()) . "." . $extension;
-            $path = public_path('/gambar');
-            $request->file('gambar')->move($path,$newName);
-            $postBerita = Berita::create([
-                'judul' => $request->judul,
-                'deskripsi' => $request->deskripsi,
-                'gambar' => $newName,
-                'category_id' => $request->category_id
-            ]);
-        }
-        if($postBerita){
+
+        $originalName = $request->file('gambar')->getClientOriginalName();
+        $extension = $request->file('gambar')->getClientOriginalExtension();
+        $newName = md5($originalName . Carbon::now()) . "." . $extension;
+        $path = public_path('/gambar');
+        $request->file('gambar')->move($path, $newName);
+        $postBerita = Berita::create([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $newName,
+            'category_id' => $request->category_id
+        ]);
+        
+        if ($postBerita) {
             return redirect('/berita')->with('success', 'Berita Berhasil Ditambahkan');
         } else {
             return redirect('/berita')->with('gagal', "Berita Gagal Ditammbahkan");
@@ -71,7 +63,7 @@ class BeritaController extends Controller
     public function show(string $id)
     {
         $dataBerita = Berita::find($id);
-        return view('berita.detail',['dataBerita' => $dataBerita]);
+        return view('berita.detail', ['dataBerita' => $dataBerita]);
     }
 
     /**
@@ -90,14 +82,14 @@ class BeritaController extends Controller
     public function update(Request $request, string $id)
     {
         $dataOld = Berita::find($id);
-        if($request->file('gambar')){
+        if ($request->file('gambar')) {
             File::delete(public_path('/gambar/'), $dataOld->gambar);
             $time = Hash::make(Carbon::now());
             $originalName = $request->file('gambar')->getClientOriginalName();
             $extension = $request->file('gambar')->getClientOriginalExtension();
-            $newName = Hash::make($originalName.$time) . "." . $extension;
+            $newName = Hash::make($originalName . $time) . "." . $extension;
             $path = public_path('/gambar');
-            $request->file('gambar')->move($path,$newName);
+            $request->file('gambar')->move($path, $newName);
             $dataBerita = Berita::find($id);
             $dataBerita->update([
                 'judul' => $request->judul,
@@ -105,7 +97,7 @@ class BeritaController extends Controller
                 'category_id' => $request->category_id,
                 'gambar' => $newName
             ]);
-        }else {
+        } else {
             $dataBerita = Berita::find($id);
             $dataBerita->update([
                 'judul' => $request->judul,
@@ -114,13 +106,11 @@ class BeritaController extends Controller
             ]);
         }
 
-        if($dataBerita){
+        if ($dataBerita) {
             return redirect('/berita')->with('success', 'Berita Berhasil DiUpdate');
         } else {
             return redirect('/berita')->with('success', 'Berita Berhasil DiUpdate');
         }
-        
-
     }
 
     /**
@@ -129,7 +119,7 @@ class BeritaController extends Controller
     public function destroy(string $id)
     {
         $dataBerita = Berita::find($id);
-        File::delete(public_path('/gambar/').$dataBerita->gambar);
+        File::delete(public_path('/gambar/') . $dataBerita->gambar);
         $dataBerita->delete();
         return redirect('/berita')->with('success', 'Berita Berhasil Dihapus');
     }

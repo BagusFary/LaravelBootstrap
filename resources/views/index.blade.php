@@ -36,7 +36,11 @@
                     <li class="nav-item"><a class="nav-link" href="/layanan">Layanan</a></li>
                     <li class="nav-item"><a class="nav-link" href="/hubungi">Hubungi</a></li>
                     <li class="nav-item"><a class="nav-link" href="/news">Berita</a></li>
+                    @if (Auth::check())
+                    <li class="nav-item"><a class="nav-link" href="/berita">Dashboard</a></li>
+                    @else 
                     <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    @endif
                 </ul>
             </div>
         </div>

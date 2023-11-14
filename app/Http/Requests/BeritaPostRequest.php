@@ -22,8 +22,8 @@ class BeritaPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul' => 'required',
-            'deskripsi' => 'required',
+            'judul' => 'required|max:100',
+            'deskripsi' => 'required|max:100',
             'gambar' => 'required'
         ];
     }
