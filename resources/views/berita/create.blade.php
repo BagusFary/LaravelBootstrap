@@ -34,6 +34,13 @@
                         <label for="gambar">Gambar</label>
                         <input type="file" name="gambar" class="form-control" id="gambar" aria-describedby="password">
                     </div>
+                   <div class="form-group mb-2">
+                    <select class="form-select" aria-label="Default select example">
+                            @foreach ($Category as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                      </select>
+                   </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

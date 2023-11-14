@@ -29,6 +29,7 @@
             <th>Judul</th>
             <th>Deskripsi</th>
             <th>Gambar</th>
+            <th>Category</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($dataBerita as $item)
@@ -43,14 +44,16 @@
                     </div>
                 </td>
                 <td>
+                    {{ $item->category->name }}
+                </td>
+                <td>
                     <form action="{{ route('berita.destroy', $item->id) }}" method="POST">
-
                         <a class="btn btn-info" href="{{ route('berita.show', $item->id) }}">Show</a>
                         <a class="btn btn-primary" href="{{ route('berita.edit', $item->id) }}">Edit</a>
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                    </form>
+                   </form>
                 </td>
             </tr>
         @endforeach
