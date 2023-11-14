@@ -20,6 +20,12 @@
             </li>
           </ul>
         </div>
+        <div class="d-flex justify-content-end">
+          <form action="/logout" method="post">
+            @csrf
+              <button type="submit" class="btn btn-outline-dark" onClick="return confirm('Anda akan Logout')">Logout</button>
+          </form>
+        </div>
       </div>
     </nav>
     <div class="container">

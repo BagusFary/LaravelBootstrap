@@ -35,7 +35,7 @@
                         <input type="file" name="gambar" class="form-control" id="gambar" aria-describedby="password">
                     </div>
                    <div class="form-group mb-2">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" name="category_id">
                             @foreach ($Category as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach

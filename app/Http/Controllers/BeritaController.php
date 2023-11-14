@@ -54,7 +54,8 @@ class BeritaController extends Controller
             $postBerita = Berita::create([
                 'judul' => $request->judul,
                 'deskripsi' => $request->deskripsi,
-                'gambar' => $newName
+                'gambar' => $newName,
+                'category_id' => $request->category_id
             ]);
         }
         if($postBerita){
@@ -78,8 +79,9 @@ class BeritaController extends Controller
      */
     public function edit(string $id)
     {
-        $dataBerita = Berita::find($id);
-        return view('berita.edit', ['dataBerita' => $dataBerita]);
+        $dataBerita = Berita::with('category:id,name')->find($id);
+        $Category = Category::get();
+        return view('berita.edit', ['dataBerita' => $dataBerita, 'Category' => $Category]);
     }
 
     /**
@@ -100,13 +102,15 @@ class BeritaController extends Controller
             $dataBerita->update([
                 'judul' => $request->judul,
                 'deskripsi' => $request->deskripsi,
+                'category_id' => $request->category_id,
                 'gambar' => $newName
             ]);
         }else {
             $dataBerita = Berita::find($id);
             $dataBerita->update([
                 'judul' => $request->judul,
-                'deskripsi' => $request->deskripsi
+                'deskripsi' => $request->deskripsi,
+                'category_id' => $request->category_id
             ]);
         }
 

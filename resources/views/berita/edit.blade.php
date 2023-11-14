@@ -2,9 +2,9 @@
 
 @section('content')
 
-<div class="container mt-5">
+<div class="container mt-1">
 
-    <div class="row justify-content-center align-items-center">
+    <div class="row justify-content-center align-items-center ">
         <div class="card" style="width: 24rem;">
             <div class="card-header">
                 Edit Berita
@@ -36,6 +36,14 @@
                         <img src="{{ asset('/gambar/'. $dataBerita->gambar) }}" class="w-100" alt="">
                         <input type="file" name="gambar" class="form-control" id="gambar" aria-describedby="gambar">
                     </div>
+                    <div class="form-group mb-2">
+                        <select class="form-select" aria-label="Default select example" name="category_id">
+                            <option selected value="{{ $dataBerita->category->id }}">{{ $dataBerita->category->name }}</option>
+                                @foreach ($Category as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                          </select>
+                       </div>
                     <button type="submit" class="btn btn-success">Save</button>
                     <a href="/berita" class="btn btn-warning">Back</a>
                 </form>

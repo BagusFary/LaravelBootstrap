@@ -23,6 +23,7 @@
         </div>
     @endif
 
+
     <table class="table table-bordered">
         <tr>
             <th>NO</th>
@@ -44,7 +45,17 @@
                     </div>
                 </td>
                 <td>
-                    {{ $item->category->name }}
+                    @if (empty($item->category->name))
+                        <p>Belum ada kategori</p>
+                    @else
+                        @if ($item->category->name == 'Keuangan')           
+                            <span class="badge rounded-pill text-bg-success">Keuangan</span>
+                        @elseif ($item->category->name == 'Konstruksi')
+                            <span class="badge rounded-pill text-bg-danger">Konstruksi</span>
+                        @elseif ($item->category->name == 'Teknologi')
+                            <span class="badge rounded-pill text-bg-warning">Teknologi</span>
+                        @endif
+                    @endif
                 </td>
                 <td>
                     <form action="{{ route('berita.destroy', $item->id) }}" method="POST">
