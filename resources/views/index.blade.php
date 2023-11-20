@@ -36,6 +36,7 @@
                     <li class="nav-item"><a class="nav-link" href="/layanan">Layanan</a></li>
                     <li class="nav-item"><a class="nav-link" href="/hubungi">Hubungi</a></li>
                     <li class="nav-item"><a class="nav-link" href="/news">Berita</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/artikel">Artikel</a></li>
                     @if (Auth::check())
                     <li class="nav-item"><a class="nav-link" href="/berita">Dashboard</a></li>
                     @else 

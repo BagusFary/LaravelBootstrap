@@ -23,6 +23,7 @@ Route::get('/layanan', [IndexController::class, 'layanan']);
 Route::get('/tentang', [IndexController::class, 'tentang']);
 Route::get('/hubungi', [IndexController::class, 'hubungi']);
 Route::get('/news',[IndexController::class, 'berita']);
+Route::get('/artikel',[IndexController::class, 'artikel']);
 Route::resource('article', ArticleController::class);
 Route::resource('berita', BeritaController::class)->middleware('auth');
 Auth::routes();
