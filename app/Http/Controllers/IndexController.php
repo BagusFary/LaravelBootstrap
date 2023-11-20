@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -31,5 +32,11 @@ class IndexController extends Controller
     {
         $dataBerita = Berita::paginate(3);
         return view("berita.berita",["dataBerita" => $dataBerita]);
+    }
+
+    public function artikel()
+    {
+        $dataArticle = Article::paginate(3);
+        return view("article.article",["dataArticle" => $dataArticle]);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
@@ -23,6 +23,7 @@ Route::get('/layanan', [IndexController::class, 'layanan']);
 Route::get('/tentang', [IndexController::class, 'tentang']);
 Route::get('/hubungi', [IndexController::class, 'hubungi']);
 Route::get('/news',[IndexController::class, 'berita']);
+Route::resource('article', ArticleController::class);
 Route::resource('berita', BeritaController::class)->middleware('auth');
 Auth::routes();
 

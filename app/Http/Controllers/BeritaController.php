@@ -8,9 +8,7 @@ use App\Models\Berita;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\BeritaPostRequest;
-use App\Http\Requests\BeritaUpdateRequest;
 
 class BeritaController extends Controller
 {
@@ -84,10 +82,10 @@ class BeritaController extends Controller
         $dataOld = Berita::find($id);
         if ($request->file('gambar')) {
             File::delete(public_path('/gambar/'), $dataOld->gambar);
-            $time = Hash::make(Carbon::now());
+            $time = md5(Carbon::now());
             $originalName = $request->file('gambar')->getClientOriginalName();
             $extension = $request->file('gambar')->getClientOriginalExtension();
-            $newName = Hash::make($originalName . $time) . "." . $extension;
+            $newName = md5($originalName . $time) . "." . $extension;
             $path = public_path('/gambar');
             $request->file('gambar')->move($path, $newName);
             $dataBerita = Berita::find($id);

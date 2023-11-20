@@ -17,6 +17,9 @@
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="btn btn-outline-dark" aria-current="page" href="/news">List Berita</a>
+              <a class="btn btn-outline-dark" aria-current="page" href="/news">List Artikel</a>
+              <a class="btn btn-success" aria-current="page" href="/berita">Berita</a>
+              <a class="btn btn-success" aria-current="page" href="/artikel">Artikel</a>
             </li>
           </ul>
         </div>
