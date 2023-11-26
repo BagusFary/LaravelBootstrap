@@ -9,10 +9,10 @@
             <div class="card-header my-2">
                 Detail Artikel
             </div>
-            <img src="{{ asset('/gambarartikel/'. $dataArtikel->image) }}" class="card-img-top" alt="...">
+            <img src="{{ asset('/gambarartikel/'. $dataArticle->gambar) }}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">{{ $dataArtikel->title }}</h5>
-                <p class="card-text">{{ $dataArtikel->content }}</p>
+                <h5 class="card-title">{{ $dataArticle->title }}</h5>
+                <p class="card-text">{{ $dataArticle->content }}</p>
                 <a href="/berita" class="btn btn-warning">Back</a>
             </div>
         </div>

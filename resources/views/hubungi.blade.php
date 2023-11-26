@@ -63,9 +63,9 @@
                 <div class="card py-4 h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                        <h4 class="text-uppercase m-0">Address</h4>
+                        <h4 class="text-uppercase m-0 text-light">Address</h4>
                         <hr class="my-4 mx-auto" />
-                        <div class="small text-black-50">Kota Malang, Malang</div>
+                        <div class="small text-light">Kota Malang, Malang</div>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                 <div class="card py-4 h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-envelope text-primary mb-2"></i>
-                        <h4 class="text-uppercase m-0">Email</h4>
+                        <h4 class="text-uppercase m-0 text-light">Email</h4>
                         <hr class="my-4 mx-auto" />
                         <div class="small text-black-50"><a href="#!">investama@gmail.com</a></div>
                     </div>
@@ -83,9 +83,9 @@
                 <div class="card py-4 h-100">
                     <div class="card-body text-center">
                         <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                        <h4 class="text-uppercase m-0">Phone</h4>
+                        <h4 class="text-uppercase m-0 text-light">Phone</h4>
                         <hr class="my-4 mx-auto" />
-                        <div class="small text-black-50">+6287658444776</div>
+                        <div class="small text-light">+6287658444776</div>
                     </div>
                 </div>
             </div>

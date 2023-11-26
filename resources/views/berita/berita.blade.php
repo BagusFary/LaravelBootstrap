@@ -49,8 +49,8 @@
                                 <div class="card-body">
                                     <h4 class="card-title h5 h4-sm"><i class="fas fa-caret-right"
                                             aria-hidden="true"></i><span>{{ $item->category->name }}</span><i class="fas fa-caret-right"
-                                            aria-hidden="true"></i><span>{{ date_format($item->created_at, "Y/m/d") }}</span> </h4>
-                                    <a href="" class="text-decoration-none">
+                                            aria-hidden="true"></i><span>{{ date_format($item->created_at, 'd F Y') }}</span> </h4>
+                                    <a href="news/{{ $item->id }}" class="text-decoration-none">
                                         <p class="card-text">{{ $item->judul }}</p>
                                     </a>
                                 </div>
