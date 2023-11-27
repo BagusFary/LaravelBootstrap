@@ -51,13 +51,12 @@ class IndexController extends Controller
     public function artikelShow($id)
     {
         $dataArticle = Article::find($id);
-        $dataArticleTerkait = Article::where('id', "!=", $id)->take(3)->get();
+        $dataArticleTerkait = Article::where('id', "!=", $id)->inRandomOrder()->limit(3)->get();
         return view('article.show',["dataArticle" => $dataArticle, "dataArticleTerkait" => $dataArticleTerkait]);
     }
     
     public function cetakPdf()
     {
-        dd("HELLLO");
         $dataArticle = Article::all();
         $pdf = PDF::loadview('article.article_pdf',['dataArticle' => $dataArticle]);
         return $pdf->stream();
