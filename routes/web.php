@@ -26,6 +26,7 @@ Route::get('/news',[IndexController::class, 'berita']);
 Route::get('/news/{id}',[IndexController::class, 'beritaShow']);
 Route::get('/artikel',[IndexController::class, 'artikel']);
 Route::get('/artikel/{id}',[IndexController::class, 'artikelShow']);
+Route::get('/artikel/cetakpdf', [IndexController::class, 'cetakPdf']);
 Route::resource('article', ArticleController::class);
 Route::resource('berita', BeritaController::class)->middleware('auth');
 Auth::routes();

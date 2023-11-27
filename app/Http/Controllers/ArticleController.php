@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Article;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -113,4 +114,6 @@ class ArticleController extends Controller
         $dataArticle->delete();
         return redirect('/article')->with('success', 'Article Berhasil Dihapus');
     }
+
+    
 }

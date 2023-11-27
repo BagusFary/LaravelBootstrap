@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Berita;
 use App\Models\Article;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -53,4 +54,13 @@ class IndexController extends Controller
         $dataArticleTerkait = Article::where('id', "!=", $id)->take(3)->get();
         return view('article.show',["dataArticle" => $dataArticle, "dataArticleTerkait" => $dataArticleTerkait]);
     }
+    
+    public function cetakPdf()
+    {
+        dd("HELLLO");
+        $dataArticle = Article::all();
+        $pdf = PDF::loadview('article.article_pdf',['dataArticle' => $dataArticle]);
+        return $pdf->stream();
+    }
+    
 }

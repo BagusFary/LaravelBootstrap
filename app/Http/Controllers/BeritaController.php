@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\BeritaPostRequest;
+use App\Http\Requests\BeritaUpdateRequest;
 
 class BeritaController extends Controller
 {
@@ -77,7 +78,7 @@ class BeritaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BeritaUpdateRequest $request, string $id)
     {
         $dataOld = Berita::find($id);
         if ($request->file('gambar')) {
